@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
 
   function handleResponse(response) {
+    console.log(response.data);
     setWeatherData({
       ready: true,
       temperature: response.data.main.temp,
@@ -13,7 +15,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
-      date: "Wednesday, 07:00",
+      date: new Date(response.data.dt * 1000),
       iconUrl:
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAAcZJREFUaN7tmdFtgzAQhhmBEToCI7BApYzACB7BIyB1ARaoxAZlgD64T5XfGMEbuHZ1tMYBbPAZEumQfkGic3zf+Xy+JIXWunhmFQRAAARAAARAACmXlJIbjUbaUW9UF5kuFADjYGk0eI77ah4ZoA04P6kG+xf7bO+XA4AzOlLjQoqNKSmGAdDsAEBPMQwAjgSgj6RUEsBK1UlRdwoAVB2B6PjffjgLoM/g/K+yA0D505k1xO6HIwBtYOJmmhxK7C2wYgLGCed1BeKOKiyApRNXwcqUANCDnb0zeL/2Nrzw6z/YlRtBajEAGojI4DhfQaTVysQKxpUAIeCZeWOGiLLMMPZA7URrSpOow8pJD4ZRqaIBIDJ+hDsAUJGTK2d/KIxKFQUQ0WnqHQDVzv5pq69iQYCEpV6qNtNmxmw/2hAA1olbITZ+d5+9BYAS/dS8D4jnBuicQpBD9QwAlhuz3+GnfSfeWRbReh9MAH6W4+Jb6vev7S709UOWRrc9AN1ZAG+fUhvnQgDc2mT9VeLoFXLuKQFsuti0ibV5RACbVjzWhgAIgACuBbg7pBYANm0uBViBmgGEbAggA8DsIAvZ0J98BEAA//oBqG5a70gUjuIAAAAASUVORK5CYII=",
     });
@@ -42,7 +44,9 @@ export default function Weather(props) {
         </form>
         <h1> {weatherData.city}</h1>
         <ul>
-          <li>{weatherData.date}</li>
+          <li>
+            <FormattedDate date={weatherData.date} />
+          </li>
           <li className="text-capitilize">{weatherData.description}</li>
         </ul>
         <div className="row mt-3">
