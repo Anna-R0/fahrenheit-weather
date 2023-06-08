@@ -23,9 +23,9 @@ export default function Weather(props) {
     });
   }
   function search() {
-    const apiKey = "b82fba609f6a6d89452421e5d04b5255";
+    const apiKey = "0e91c5fcb7b9b0cdd2a6164bda0dcb3c";
 
-    let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(handleResponse);
   }
 
