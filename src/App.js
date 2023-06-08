@@ -11,6 +11,7 @@ export default function App() {
           <a
             href="https://github.com/Anna-R0/fahrenheit-weather"
             target="_blank"
+            rel="noopener noreferrer"
           >
             {" "}
             open-sourced on github
